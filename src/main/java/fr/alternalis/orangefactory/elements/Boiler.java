@@ -10,7 +10,7 @@ public class Boiler
     private final Double maxTemp = 100D;
     private final Double minTemp = 0D;
 
-    private static final Integer adaptationTime = 5000;
+    private static final Integer latencyBoiler = 1000;
 
     public void powerChange(Double newPower)
     {
@@ -23,8 +23,16 @@ public class Boiler
     {
         try
         {
-            wait(adaptationTime);
-            temp = newTemp;
+            int timeMax = latencyBoiler * (int)(newTemp - temp);
+            timeMax = Math.abs(timeMax);
+
+            int nbCycle = timeMax / Parameter.cycleTime;
+
+            for(int i = 0; i >= nbCycle; i++)
+            {
+                wait(latencyBoiler);
+                temp = newTemp;
+            }
         }
         catch (InterruptedException e)
         {
@@ -61,8 +69,8 @@ public class Boiler
         }
     }
 
-    public static Integer getAdaptationTime()
+    public static Integer getLatencyBoiler()
     {
-        return adaptationTime;
+        return latencyBoiler;
     }
 }
