@@ -1,7 +1,7 @@
 package fr.alternalis.orangefactory.elements;
 
 public class Pump {
-    private final Double maxOut = 20D;
+    private final Double maxOut = 2000D;
     private final Double minOut = 1D;
     private Double debit = 20D;
 

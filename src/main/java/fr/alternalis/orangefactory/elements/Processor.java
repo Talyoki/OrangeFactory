@@ -59,6 +59,12 @@ public class Processor {
         if(thermalExchanger2 != null){
             if(thermalExchanger2.getTemp() < tempMinForValidity){
                 Indicator.recycle = Indicator.recycle + thermalExchanger2.getQuantity();
+                if(thermalExchanger2.getTemp() < tank.getTemp()){
+                    tank.setTemp(tank.getTemp() - 1);
+                }
+                if(thermalExchanger2.getTemp() > tank.getTemp()){
+                    tank.setTemp(tank.getTemp() + 1);
+                }
                 tank.addJuice(thermalExchanger2.getQuantity());
             }
             else if(thermalExchanger2.getTemp() > tempMaxForValidity){

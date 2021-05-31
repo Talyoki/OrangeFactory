@@ -3,7 +3,7 @@ package fr.alternalis.orangefactory.elements;
 public class Valve
 {
 
-    private final Double maxOut = 20D;
+    private final Double maxOut = 200D;
     private final Double minOut = 1D;
     private Double debit = 20D;
 
