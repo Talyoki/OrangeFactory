@@ -51,7 +51,7 @@ public class Main extends Application
     }
 
     public void engageFactory() {
-        Indicator.startTime = System.nanoTime();
+        Indicator.startTime = System.currentTimeMillis();
         Timer timer = new Timer("FactoryTimer");
         timer.schedule(new Processor(), Parameter.cycleTime.intValue());
         Timer clockTimer = new Timer("ClockTimer");
