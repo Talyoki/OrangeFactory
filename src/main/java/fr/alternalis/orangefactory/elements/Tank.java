@@ -13,7 +13,6 @@ public class Tank
     private static final Double LEVEL_FULL_ALARM = 900D;
     private static final Double LEVEL_EMPTY_ALARM = 100D;
 
-    //TODO: Check if tank is empty
     public Juice generateJuice(Double valveSize){
         if(valveSize > level){
             valveSize = level;
