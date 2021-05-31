@@ -28,25 +28,21 @@ public class Processor {
     }
 
     public void thermalExchange(Juice juice1, Juice juice2){
-        Double tempDif;
+        Double tempDif =  Math.abs(juice2.getTemp() - juice1.getTemp()) / 2;
         if(juice1.getTemp() < juice2.getTemp()){
-            tempDif = (juice2.getTemp() - juice1.getTemp()) / 2;
             juice2.setTemp(juice2.getTemp() - tempDif);
             juice1.setTemp(juice1.getTemp() + tempDif);
         } else if (juice1.getTemp() > juice2.getTemp()) {
-            tempDif = (juice1.getTemp() - juice2.getTemp()) / 2;
             juice2.setTemp(juice2.getTemp() + tempDif);
             juice1.setTemp(juice1.getTemp() - tempDif);
         }
     }
 
     public void thermalExchangeBoiler(Juice juice){
-        Double tempDif;
+        Double tempDif = Math.abs(juice.getTemp() - boiler.getTemp()) / 2;
         if(juice.getTemp() < boiler.getTemp()){
-            tempDif = (boiler.getTemp() - juice.getTemp()) / 2;
             juice.setTemp(juice.getTemp() + tempDif);
         } else if (juice.getTemp() > boiler.getTemp()){
-            tempDif = (juice.getTemp() - boiler.getTemp()) / 2;
             juice.setTemp(juice.getTemp() - tempDif);
         }
     }
