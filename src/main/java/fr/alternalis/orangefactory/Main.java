@@ -33,14 +33,15 @@ public class Main extends Application
         Parent root;
         try
         {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("main.fxml")));
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
             stage.setTitle("Orange Factory");
             stage.getIcons().add(new Image(PATH_ICON));
             stage.setScene(new Scene(root));
             stage.setResizable(false);
 
+            //stage.show();
+
             engageFactory();
-            stage.show();
         }
         catch (IOException e)
         {
@@ -51,8 +52,8 @@ public class Main extends Application
     public void engageFactory() {
         Indicator.startTime = System.currentTimeMillis();
         Timer timer = new Timer("FactoryTimer");
-        timer.schedule(new Processor(), Parameter.cycleTime.intValue());
+        timer.schedule(new Processor(), 0, Parameter.cycleTime.intValue());
         Timer clockTimer = new Timer("ClockTimer");
-        clockTimer.schedule(new Clock(), 1000);
+        clockTimer.schedule(new Clock(), 0,  1000);
     }
 }

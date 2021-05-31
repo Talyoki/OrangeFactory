@@ -10,7 +10,7 @@ public class Boiler
 
     private final Double maxPower = 100D;
     private final Double minPower = 1D;
-    private final Double maxTemp = 100D;
+    private final Double maxTemp = 150D;
     private final Double minTemp = 0D;
 
     private static final Double ALARM_OVERLOAD_TEMP = 90D;
@@ -38,7 +38,7 @@ public class Boiler
 
             for(int i = 0; i < nbCycle; i++)
             {
-                wait(latencyBoiler);
+                Thread.sleep(latencyBoiler);
                 if(temp  < newTemp) temp = temp + 1;
                 else if (temp > newTemp) temp = temp - 1;
             }

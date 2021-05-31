@@ -2,12 +2,12 @@ package fr.alternalis.orangefactory.elements;
 
 public class Tank
 {
-    private Double temp;
+    private Double temp = 21D;
     private Double level = 500D;
     private Boolean fullAlarm;
     private Boolean emptyAlarm;
 
-    private Double enteringAmount = 25D;
+    private Double enteringAmount = 0D;
 
     private static final Double LEVEL_MAX = 1000D;
     private static final Double LEVEL_FULL_ALARM = 900D;

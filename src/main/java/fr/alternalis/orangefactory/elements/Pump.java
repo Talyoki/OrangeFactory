@@ -3,7 +3,7 @@ package fr.alternalis.orangefactory.elements;
 public class Pump {
     private final Double maxOut = 2000D;
     private final Double minOut = 1D;
-    private Double debit = 20D;
+    private Double debit = 2000D;
 
     private static final Integer latencyPump = 1000;
 
@@ -20,7 +20,7 @@ public class Pump {
 
     public void applyDebit(Double debit){
         try {
-            wait(latencyPump);
+            Thread.sleep(latencyPump);
 
             if (debit > maxOut)
             {

@@ -12,41 +12,57 @@ public class Processor extends TimerTask {
     private Juice thermalExchanger3 = null;
     private Boiler boiler = new Boiler();
     private Tank tank = new Tank();
-    private Pump pump = new Pump();
     private Valve valve = new Valve();
 
     @Override
     public void run(){
+        boiler.powerChange(45D);
         tank.enteringJuice();
         thermalExchanger1 = tank.generateJuice(valve.getDebit());
         if(thermalExchanger1 != null && thermalExchanger3 != null){
-            thermalExchange(thermalExchanger1,thermalExchanger3);
+            thermalExchange();
         }
         if(thermalExchanger2 != null){
-            thermalExchangeBoiler(thermalExchanger2);
+            thermalExchangeBoiler();
         }
         switchingSides();
         tank.checkAllAlarm();
         boiler.checkAllAlarm();
+
+        System.out.println("Reserve :" + tank.getLevel());
+        System.out.println("Pompe :" + boiler.getPump().getDebit());
+        System.out.println("Température cuve :" + tank.getTemp());
+        if(thermalExchanger1 != null) System.out.println("Température échangeur 1 :" + thermalExchanger1.getTemp());
+        if(thermalExchanger2 != null) System.out.println("Température échangeur 2 :" + thermalExchanger2.getTemp());
+        if(thermalExchanger3 != null) System.out.println("Température échangeur 3 :" + thermalExchanger3.getTemp());
     }
 
-    public void thermalExchange(Juice juice1, Juice juice2){
-        Double tempDif =  Math.abs(juice2.getTemp() - juice1.getTemp()) / 2;
-        if(juice1.getTemp() < juice2.getTemp()){
-            juice2.setTemp(juice2.getTemp() - tempDif);
-            juice1.setTemp(juice1.getTemp() + tempDif);
-        } else if (juice1.getTemp() > juice2.getTemp()) {
-            juice2.setTemp(juice2.getTemp() + tempDif);
-            juice1.setTemp(juice1.getTemp() - tempDif);
+    public void thermalExchange(){
+        Double n = 0.2;
+
+        Double thermalExchanger1g = thermalExchanger1.getTemp()*n;
+        Double thermalExchanger3g = thermalExchanger3.getTemp()*n;
+
+        if(thermalExchanger1g > thermalExchanger3g)
+        {
+            thermalExchanger1.setTemp(thermalExchanger1.getTemp() - thermalExchanger3g);
+            thermalExchanger3.setTemp(thermalExchanger3.getTemp() + thermalExchanger1g);
+        }else
+        {
+            thermalExchanger1.setTemp(thermalExchanger1.getTemp() + thermalExchanger3g);
+            thermalExchanger3.setTemp(thermalExchanger3.getTemp() - thermalExchanger1g);
         }
     }
 
-    public void thermalExchangeBoiler(Juice juice){
-        Double tempDif = Math.abs(juice.getTemp() - boiler.getTemp()) / 2;
-        if(juice.getTemp() < boiler.getTemp()){
-            juice.setTemp(juice.getTemp() + tempDif);
-        } else if (juice.getTemp() > boiler.getTemp()){
-            juice.setTemp(juice.getTemp() - tempDif);
+    public void thermalExchangeBoiler(){
+        Double n = 0.1;
+
+        Double boilerg = boiler.getTemp()*n;
+
+        if(thermalExchanger2.getTemp() < boiler.getTemp()){
+            thermalExchanger2.setTemp(thermalExchanger2.getTemp() + boilerg);
+        } else if (thermalExchanger2.getTemp() > boiler.getTemp()){
+            thermalExchanger2.setTemp(thermalExchanger2.getTemp() - boilerg);
         }
     }
 

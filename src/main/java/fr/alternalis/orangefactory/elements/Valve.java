@@ -22,7 +22,7 @@ public class Valve
 
     public void applyDebit(Double debit){
         try {
-            wait(latencyValve);
+            Thread.sleep(latencyValve);
 
             if (debit > maxOut)
             {
