@@ -66,9 +66,13 @@ public class Processor {
             else if(thermalExchanger2.getTemp() > tempMaxForValidity){
                 Indicator.spoil = Indicator.spoil + thermalExchanger2.getQuantity();
             } else {
-                thermalExchanger3 = thermalExchanger2;
+                thermalExchanger3 = clone(thermalExchanger2);
             }
         }
-        thermalExchanger2 = thermalExchanger1;
+        thermalExchanger2 = clone(thermalExchanger1);
+    }
+
+    private Juice clone(Juice juice) {
+        return new Juice(juice.getQuantity(), juice.getTemp());
     }
 }
