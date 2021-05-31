@@ -1,5 +1,7 @@
 package fr.alternalis.orangefactory;
 
+import fr.alternalis.orangefactory.elements.Parameter;
+import fr.alternalis.orangefactory.elements.Processor;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Timer;
 
 public class Main extends Application
 {
@@ -26,7 +29,7 @@ public class Main extends Application
     @Override
     public void start(Stage stage)
     {
-        Parent root = null;
+        Parent root;
         try
         {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
@@ -34,11 +37,16 @@ public class Main extends Application
             stage.getIcons().add(new Image(PATH_ICON));
             stage.setScene(new Scene(root));
             stage.setResizable(false);
+            engageFactory();
             stage.show();
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
+    }
+
+    public void engageFactory(){
+        new Timer().schedule(new Processor(), Parameter.cycleTime.intValue());
     }
 }

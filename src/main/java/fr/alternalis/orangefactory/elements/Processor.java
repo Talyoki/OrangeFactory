@@ -1,6 +1,8 @@
 package fr.alternalis.orangefactory.elements;
 
-public class Processor {
+import java.util.TimerTask;
+
+public class Processor extends TimerTask {
 
     private final Double tempMinForValidity = 70D;
     private final Double tempMaxForValidity = 80D;
@@ -13,7 +15,8 @@ public class Processor {
     private Pump pump = new Pump();
     private Valve valve = new Valve();
 
-    public void mainProcess(){
+    @Override
+    public void run(){
         tank.enteringJuice();
         thermalExchanger1 = tank.generateJuice(valve.getDebit());
         if(thermalExchanger1 != null && thermalExchanger3 != null){
