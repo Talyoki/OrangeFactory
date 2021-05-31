@@ -7,6 +7,7 @@ public class Indicator
     public static Double recycle = 0D;
     public static Double spoil = 0D;
     public static Double pasteurized = 0D;
+    public static long startTime;
 
     public static Double getPercentageProduced(){
         return pasteurized/total;

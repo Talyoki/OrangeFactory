@@ -1,5 +1,7 @@
 package fr.alternalis.orangefactory;
 
+import fr.alternalis.orangefactory.elements.Clock;
+import fr.alternalis.orangefactory.elements.Indicator;
 import fr.alternalis.orangefactory.elements.Parameter;
 import fr.alternalis.orangefactory.elements.Processor;
 import javafx.application.Application;
@@ -11,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Timer;
 
 public class Main extends Application
@@ -32,11 +35,12 @@ public class Main extends Application
         Parent root;
         try
         {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("main.fxml")));
             stage.setTitle("Orange Factory");
             stage.getIcons().add(new Image(PATH_ICON));
             stage.setScene(new Scene(root));
             stage.setResizable(false);
+            Indicator.startTime = System.nanoTime();
             engageFactory();
             stage.show();
         }
@@ -49,5 +53,8 @@ public class Main extends Application
     public void engageFactory(){
        Timer timer = new Timer("FactoryTimer");
        timer.schedule(new Processor(), Parameter.cycleTime.intValue());
+
+       Timer clockTimer = new Timer("ClockTimer");
+       clockTimer.schedule(new Clock(), 1000);
     }
 }
