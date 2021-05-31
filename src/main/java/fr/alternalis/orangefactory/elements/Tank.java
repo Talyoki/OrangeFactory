@@ -7,9 +7,28 @@ public class Tank
     private Boolean fullAlarm;
     private Boolean emptyAlarm;
 
+    private Double enteringAmount = 25D;
+
     private static final Double LEVEL_MAX = 1000D;
     private static final Double LEVEL_FULL_ALARM = 900D;
     private static final Double LEVEL_EMPTY_ALARM = 100D;
+
+    //TODO: Check if tank is empty
+    public Juice generateJuice(Double valveSize){
+        if(valveSize > level){
+            valveSize = level;
+        }
+        if(level < 0){
+            return null;
+        }
+        removeJuice(valveSize);
+        return new Juice(valveSize, temp);
+    }
+
+    public void enteringJuice(){
+        addJuice(enteringAmount);
+        Indicator.total = Indicator.total + enteringAmount;
+    }
 
     public void addJuice(Double qt)
     {
@@ -25,17 +44,17 @@ public class Tank
     public void removeJuice(Double qt)
     {
         level = level - qt;
-        if(level > 0) level = 0D;
+        if(level < 0) level = 0D;
     }
 
     public void checkFullAlarm()
     {
-        if(level >= LEVEL_FULL_ALARM) fullAlarm = true;
+        fullAlarm = level >= LEVEL_FULL_ALARM;
     }
 
     public void checkEmptyAlarm()
     {
-        if(level <= LEVEL_EMPTY_ALARM) emptyAlarm = true;
+        emptyAlarm = level <= LEVEL_EMPTY_ALARM;
     }
 
     public void checkAllAlarm()
