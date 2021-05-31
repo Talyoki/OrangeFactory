@@ -47,6 +47,7 @@ public class Main extends Application
     }
 
     public void engageFactory(){
-        new Timer().schedule(new Processor(), Parameter.cycleTime.intValue());
+       Timer timer = new Timer("FactoryTimer");
+       timer.schedule(new Processor(), Parameter.cycleTime.intValue());
     }
 }
