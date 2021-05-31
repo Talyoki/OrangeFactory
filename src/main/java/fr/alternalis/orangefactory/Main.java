@@ -40,7 +40,7 @@ public class Main extends Application
             stage.getIcons().add(new Image(PATH_ICON));
             stage.setScene(new Scene(root));
             stage.setResizable(false);
-            Indicator.startTime = System.nanoTime();
+
             engageFactory();
             stage.show();
         }
@@ -50,11 +50,11 @@ public class Main extends Application
         }
     }
 
-    public void engageFactory(){
-       Timer timer = new Timer("FactoryTimer");
-       timer.schedule(new Processor(), Parameter.cycleTime.intValue());
-
-       Timer clockTimer = new Timer("ClockTimer");
-       clockTimer.schedule(new Clock(), 1000);
+    public void engageFactory() {
+        Indicator.startTime = System.nanoTime();
+        Timer timer = new Timer("FactoryTimer");
+        timer.schedule(new Processor(), Parameter.cycleTime.intValue());
+        Timer clockTimer = new Timer("ClockTimer");
+        clockTimer.schedule(new Clock(), 1000);
     }
 }
