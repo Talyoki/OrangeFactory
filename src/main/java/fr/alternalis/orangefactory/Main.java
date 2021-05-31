@@ -18,8 +18,6 @@ import java.util.Timer;
 
 public class Main extends Application
 {
-    private final static Long longStart = new Date().getTime();
-    private static Stage stage;
 
     // Chemin de l'icone des fenêtres
     public static String PATH_ICON = "icons/icon.png";
