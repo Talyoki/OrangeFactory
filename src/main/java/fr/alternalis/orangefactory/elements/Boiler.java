@@ -18,6 +18,8 @@ public class Boiler
     private Boolean overloadAlarm;
     private Boolean ecoAlarm;
 
+    private Boolean active = true;
+
     private static final Integer latencyBoiler = 1000;
 
     public void powerChange(Double newPower)
@@ -118,5 +120,13 @@ public class Boiler
 
     public void setPump(Pump pump) {
         this.pump = pump;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

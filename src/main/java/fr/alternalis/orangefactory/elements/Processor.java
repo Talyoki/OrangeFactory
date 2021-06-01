@@ -55,14 +55,16 @@ public class Processor extends TimerTask {
     }
 
     public void thermalExchangeBoiler(){
-        Double n = 0.1;
+        if(boiler.getActive()){
+            Double n = 0.1;
 
-        Double boilerg = boiler.getTemp()*n;
+            Double boilerg = boiler.getTemp()*n;
 
-        if(thermalExchanger2.getTemp() < boiler.getTemp()){
-            thermalExchanger2.setTemp(thermalExchanger2.getTemp() + boilerg);
-        } else if (thermalExchanger2.getTemp() > boiler.getTemp()){
-            thermalExchanger2.setTemp(thermalExchanger2.getTemp() - boilerg);
+            if(thermalExchanger2.getTemp() < boiler.getTemp()){
+                thermalExchanger2.setTemp(thermalExchanger2.getTemp() + boilerg);
+            } else if (thermalExchanger2.getTemp() > boiler.getTemp()){
+                thermalExchanger2.setTemp(thermalExchanger2.getTemp() - boilerg);
+            }
         }
     }
 

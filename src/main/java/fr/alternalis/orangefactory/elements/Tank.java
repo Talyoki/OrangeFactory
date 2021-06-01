@@ -7,6 +7,8 @@ public class Tank
     private Boolean fullAlarm;
     private Boolean emptyAlarm;
 
+    private Boolean active = true;
+
     private Double enteringAmount = 0D;
 
     private static final Double LEVEL_MAX = 1000D;
@@ -25,8 +27,10 @@ public class Tank
     }
 
     public void enteringJuice(){
-        addJuice(enteringAmount);
-        Indicator.total = Indicator.total + enteringAmount;
+        if(active = true){
+            addJuice(enteringAmount);
+            Indicator.total = Indicator.total + enteringAmount;
+        }
     }
 
     public void addJuice(Double qt)
@@ -115,5 +119,13 @@ public class Tank
     public static Double getLevelEmptyAlarm()
     {
         return LEVEL_EMPTY_ALARM;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
