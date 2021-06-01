@@ -1,5 +1,6 @@
 package fr.alternalis.orangefactory.logger;
 
+import fr.alternalis.orangefactory.elements.Clock;
 import fr.alternalis.orangefactory.elements.Parameter;
 
 import java.io.File;
@@ -9,7 +10,7 @@ import java.io.IOException;
 public class Logger {
 
     private File logFile = null;
-    private FileWriter writer = null;
+    private static FileWriter writer = null;
 
     public void openFile(){
         try {
@@ -29,27 +30,26 @@ public class Logger {
         }
     }
 
-    //TODO: Add execution time
-    public void writeLog(String type, String element, String information){
+    public static void writeLog(String type, String element, String information){
         try {
             switch (type) {
                 case "State":
-                    writer.write("# State #" + "[ " + element + " ]" + information);
+                    writer.write(Clock.getCurrentExecTime() + " # State # " + "[ " + element + " ] " + information);
                     break;
                 case "Info":
-                    writer.write("? Info ?" + "[ " + element + " ]" + information);
+                    writer.write(Clock.getCurrentExecTime() + " ? Info ? " + "[ " + element + " ] " + information);
                     break;
                 case "Action":
-                    writer.write("> Action <" + "[ " + element + " ]" + information);
+                    writer.write(Clock.getCurrentExecTime() + " > Action < " + "[ " + element + " ] " + information);
                     break;
                 case "Event":
-                    writer.write("! Event !" + "[ " + element + " ]" + information);
+                    writer.write(Clock.getCurrentExecTime() + " ! Event ! " + "[ " + element + " ] " + information);
                     break;
                 case "Error":
-                    writer.write("< Error >" + "[ " + element + " ]" + information);
+                    writer.write(Clock.getCurrentExecTime() + " < Error > " + "[ " + element + " ] " + information);
                     break;
                 case "Result":
-                    writer.write("$ Result $" + "[ " + element + " ]" + information);
+                    writer.write(Clock.getCurrentExecTime() + " $ Result $ " + "[ " + element + " ] " + information);
                     break;
             }
         } catch (IOException e) {
