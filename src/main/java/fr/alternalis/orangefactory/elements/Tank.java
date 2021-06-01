@@ -1,11 +1,14 @@
 package fr.alternalis.orangefactory.elements;
 
+import fr.alternalis.orangefactory.logger.Logger;
+
 public class Tank
 {
     private Double temp = 21D;
     private Double level = 500D;
-    private Boolean fullAlarm;
-    private Boolean emptyAlarm;
+    private Boolean fullAlarm = false;
+    private Boolean almostEmptyAlarm = false;
+    private Boolean emptyAlarm = false;
 
     private Boolean active = true;
 
@@ -23,6 +26,7 @@ public class Tank
             return null;
         }
         removeJuice(valveSize);
+        Logger.writeLog("Action", "Cuve", "Débit vanne cuve : " + valveSize);
         return new Juice(valveSize, temp);
     }
 
@@ -40,6 +44,7 @@ public class Tank
         {
             Indicator.overflow = Indicator.overflow + level - LEVEL_MAX;
             Indicator.spoil = Indicator.spoil + level - LEVEL_MAX;
+            Logger.writeLog("Info", "Tube jaune", "Quantité gachée : " + (level - LEVEL_MAX));
             level = LEVEL_MAX;
         }
     }
@@ -53,15 +58,24 @@ public class Tank
     public void checkFullAlarm()
     {
         fullAlarm = level >= LEVEL_FULL_ALARM;
+        if(fullAlarm) Logger.writeLog("Error", "Cuve", "Capacité de la cuve dépassée");
+    }
+
+    public void checkAlmostEmptyAlarm()
+    {
+        almostEmptyAlarm = level <= LEVEL_EMPTY_ALARM && level > 0;
+        if(almostEmptyAlarm) Logger.writeLog("Error", "Cuve", "Cuve presque vide");
     }
 
     public void checkEmptyAlarm()
     {
-        emptyAlarm = level <= LEVEL_EMPTY_ALARM;
+        emptyAlarm = level <= 0D;
+        if(emptyAlarm) Logger.writeLog("Error", "Cuve", "Cuve vide");
     }
 
     public void checkAllAlarm()
     {
+        checkAlmostEmptyAlarm();
         checkEmptyAlarm();
         checkFullAlarm();
     }
@@ -96,14 +110,14 @@ public class Tank
         this.fullAlarm = fullAlarm;
     }
 
-    public Boolean getEmptyAlarm()
+    public Boolean getAlmostEmptyAlarm()
     {
-        return emptyAlarm;
+        return almostEmptyAlarm;
     }
 
-    public void setEmptyAlarm(Boolean emptyAlarm)
+    public void setAlmostEmptyAlarm(Boolean almostEmptyAlarm)
     {
-        this.emptyAlarm = emptyAlarm;
+        this.almostEmptyAlarm = almostEmptyAlarm;
     }
 
     public static Double getLevelMax()
@@ -127,5 +141,10 @@ public class Tank
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public Boolean getEmptyAlarm()
+    {
+        return emptyAlarm;
     }
 }

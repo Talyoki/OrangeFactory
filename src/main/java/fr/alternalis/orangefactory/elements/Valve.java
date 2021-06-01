@@ -1,5 +1,7 @@
 package fr.alternalis.orangefactory.elements;
 
+import fr.alternalis.orangefactory.logger.Logger;
+
 public class Valve
 {
 
@@ -18,6 +20,7 @@ public class Valve
     {
         Thread thread = new Thread(() -> applyDebit(debit));
         thread.start();
+        Logger.writeLog("Action", "Vanne", "Débit de la vanne : " + debit);
     }
 
     public void applyDebit(Double debit){

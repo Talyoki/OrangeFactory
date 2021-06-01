@@ -1,5 +1,7 @@
 package fr.alternalis.orangefactory.elements;
 
+import fr.alternalis.orangefactory.logger.Logger;
+
 public class Boiler
 {
 
@@ -15,8 +17,8 @@ public class Boiler
 
     private static final Double ALARM_OVERLOAD_TEMP = 90D;
     private static final Double ALARM_ECO_TEMP = 40D;
-    private Boolean overloadAlarm;
-    private Boolean ecoAlarm;
+    private Boolean overloadAlarm = false;
+    private Boolean ecoAlarm = false;
 
     private Boolean active = true;
 
@@ -27,6 +29,7 @@ public class Boiler
         power = newPower;
         Thread thread = new Thread(() -> tempChange(maxTemp * (newPower / 100)));
         thread.start();
+        Logger.writeLog("Action", "Chaudière", "Puissance : " + newPower);
     }
 
     public void tempChange(Double newTemp)
@@ -53,10 +56,12 @@ public class Boiler
 
     public void checkOverloadAlarm(){
         overloadAlarm = temp >= ALARM_OVERLOAD_TEMP;
+        if(overloadAlarm) Logger.writeLog("Error", "Chaudière", "Température maximale dépassée");
     }
 
     public void checkEcoAlarm(){
         ecoAlarm = temp <= ALARM_ECO_TEMP;
+        if(ecoAlarm) Logger.writeLog("Error", "Chaudière", "Température minimale dépassée");
     }
 
     public void checkAllAlarm(){

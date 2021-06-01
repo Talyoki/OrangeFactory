@@ -1,5 +1,7 @@
 package fr.alternalis.orangefactory.elements;
 
+import fr.alternalis.orangefactory.logger.Logger;
+
 import java.util.TimerTask;
 
 public class Processor extends TimerTask {
@@ -16,25 +18,27 @@ public class Processor extends TimerTask {
 
     @Override
     public void run(){
-        boiler.powerChange(45D);
-        tank.enteringJuice();
-        thermalExchanger1 = tank.generateJuice(valve.getDebit());
-        if(thermalExchanger1 != null && thermalExchanger3 != null){
-            thermalExchange();
-        }
-        if(thermalExchanger2 != null){
-            thermalExchangeBoiler();
-        }
-        switchingSides();
-        tank.checkAllAlarm();
-        boiler.checkAllAlarm();
+        if(!tank.getEmptyAlarm())
+        {
+            tank.enteringJuice();
+            thermalExchanger1 = tank.generateJuice(valve.getDebit());
+            if(thermalExchanger1 != null && thermalExchanger3 != null){
+                thermalExchange();
+            }
+            if(thermalExchanger2 != null){
+                thermalExchangeBoiler();
+            }
+            switchingSides();
+            tank.checkAllAlarm();
+            boiler.checkAllAlarm();
 
-        System.out.println("Reserve :" + tank.getLevel());
-        System.out.println("Pompe :" + boiler.getPump().getDebit());
-        System.out.println("Température cuve :" + tank.getTemp());
-        if(thermalExchanger1 != null) System.out.println("Température échangeur 1 :" + thermalExchanger1.getTemp());
-        if(thermalExchanger2 != null) System.out.println("Température échangeur 2 :" + thermalExchanger2.getTemp());
-        if(thermalExchanger3 != null) System.out.println("Température échangeur 3 :" + thermalExchanger3.getTemp());
+            /*System.out.println("Reserve :" + tank.getLevel());
+            System.out.println("Pompe :" + boiler.getPump().getDebit());
+            System.out.println("Température cuve :" + tank.getTemp());
+            if(thermalExchanger1 != null) System.out.println("Température échangeur 1 :" + thermalExchanger1.getTemp());
+            if(thermalExchanger2 != null) System.out.println("Température échangeur 2 :" + thermalExchanger2.getTemp());
+            if(thermalExchanger3 != null) System.out.println("Température échangeur 3 :" + thermalExchanger3.getTemp());*/
+        }
     }
 
     public void thermalExchange(){
@@ -71,6 +75,7 @@ public class Processor extends TimerTask {
     public void switchingSides(){
         if(thermalExchanger3 != null){
             Indicator.pasteurized = Indicator.pasteurized + thermalExchanger3.getQuantity();
+            Logger.writeLog("Info", "Tube vert", "Quantité produite : " + thermalExchanger3.getQuantity());
             thermalExchanger3 = null;
         }
         if(thermalExchanger2 != null){
@@ -83,9 +88,12 @@ public class Processor extends TimerTask {
                     tank.setTemp(tank.getTemp() + 1);
                 }
                 tank.addJuice(thermalExchanger2.getQuantity());
+                Logger.writeLog("Info", "Tube bleu", "Quantité recyclée : " + thermalExchanger2.getQuantity());
             }
             else if(thermalExchanger2.getTemp() > tempMaxForValidity){
                 Indicator.spoil = Indicator.spoil + thermalExchanger2.getQuantity();
+                Logger.writeLog("Info", "Tube rouge", "Quantité gachée : " + thermalExchanger2.getQuantity());
+
             } else {
                 thermalExchanger3 = clone(thermalExchanger2);
             }

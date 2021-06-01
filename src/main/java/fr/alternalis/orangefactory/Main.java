@@ -52,10 +52,10 @@ public class Main extends Application
     public void engageFactory() {
         Logger.openFile();
         Indicator.startTime = System.currentTimeMillis();
-        Timer timer = new Timer("FactoryTimer");
-        timer.schedule(new Processor(), 0, Parameter.cycleTime.intValue());
         Timer clockTimer = new Timer("ClockTimer");
         clockTimer.schedule(new Clock(), 0,  1000);
         Logger.writeLog("State", "Application", "Start");
+        Timer timer = new Timer("FactoryTimer");
+        timer.schedule(new Processor(), 0, Parameter.cycleTime.intValue());
     }
 }
