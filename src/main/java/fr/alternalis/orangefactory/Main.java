@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Timer;
 
@@ -33,13 +32,13 @@ public class Main extends Application
         Parent root;
         try
         {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("main.fxml"));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("main.fxml")));
             stage.setTitle("Orange Factory");
             stage.getIcons().add(new Image(PATH_ICON));
             stage.setScene(new Scene(root));
             stage.setResizable(false);
 
-            //stage.show();
+            stage.show();
 
             engageFactory();
         }
