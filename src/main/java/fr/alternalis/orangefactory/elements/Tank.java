@@ -1,5 +1,6 @@
 package fr.alternalis.orangefactory.elements;
 
+import fr.alternalis.orangefactory.Controller;
 import fr.alternalis.orangefactory.logger.Logger;
 
 public class Tank

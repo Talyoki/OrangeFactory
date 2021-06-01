@@ -6,7 +6,7 @@ public class Boiler
 {
 
     private Double temp = 21D;
-    private Double power;
+    private Double power = 0D;
 
     private Pump pump = new Pump();
 

@@ -40,22 +40,10 @@ public class Main extends Application
             stage.setResizable(false);
 
             stage.show();
-
-            engageFactory();
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-    }
-
-    public void engageFactory() {
-        Logger.openFile();
-        Indicator.startTime = System.currentTimeMillis();
-        Timer clockTimer = new Timer("ClockTimer");
-        clockTimer.schedule(new Clock(), 0,  1000);
-        Logger.writeLog("State", "Application", "Start");
-        Timer timer = new Timer("FactoryTimer");
-        timer.schedule(new Processor(), 0, Parameter.cycleTime.intValue());
     }
 }

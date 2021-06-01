@@ -1,8 +1,201 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="604.0" prefWidth="1074.0" style="-fx-background-image: url('icons/page_background.png');" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.alternalis.orangefactory.Controller">
-
-</AnchorPane>
+<VBox prefHeight="735.0" prefWidth="1234.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.alternalis.orangefactory.Controller">
+    <AnchorPane prefHeight="727.0" prefWidth="1234.0" VBox.vgrow="ALWAYS">
+        <ImageView fx:id="stopButton" fitHeight="69.0" fitWidth="79.0" layoutX="1122.0" layoutY="38.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="icons/stop.png"/>
+        </ImageView>
+        <Text layoutX="1103.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ARRÊT D'URGENCE">
+            <font>
+                <Font name="System Bold" size="12.0"/>
+            </font>
+        </Text>
+        <ImageView fx:id="stopBoiler" fitHeight="37.0" fitWidth="57.0" layoutX="1139.0" layoutY="341.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="icons/button.png"/>
+        </ImageView>
+        <Text layoutX="1102.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arrêt de la chaudière"/>
+        <ImageView fx:id="stopTank" fitHeight="37.0" fitWidth="57.0" layoutX="1139.0" layoutY="166.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="icons/button.png"/>
+        </ImageView>
+        <Text layoutX="1116.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arrêt de la cuve"/>
+        <ImageView fitHeight="37.0" fitWidth="57.0" layoutX="1139.0" layoutY="257.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <Image url="icons/button.png"/>
+        </ImageView>
+        <Text layoutX="1113.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Arrêt des vannes&#10;Non fonctionnel" textAlignment="CENTER"/>
+        <ImageView fitHeight="95.0" fitWidth="167.0" layoutX="808.0" layoutY="605.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <Image url="icons/jauge.png"/>
+        </ImageView>
+        <Text layoutX="878.0" layoutY="592.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cuve"/>
+        <ImageView fitHeight="544.0" fitWidth="786.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="icons/usine.png"/>
+        </ImageView>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bdc7d0" height="69.0" layoutX="799.0" layoutY="38.0"
+                   stroke="BLACK" strokeType="INSIDE" width="270.0"/>
+        <Rectangle fx:id="tankAlarm" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="69.0" layoutX="799.0"
+                   layoutY="131.0" stroke="BLACK" strokeType="INSIDE" width="270.0"/>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bdc7d0" height="69.0" layoutX="799.0" layoutY="225.0"
+                   stroke="BLACK" strokeType="INSIDE" width="270.0"/>
+        <Rectangle fx:id="boilerAlarm" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="69.0"
+                   layoutX="799.0" layoutY="309.0" stroke="BLACK" strokeType="INSIDE" width="270.0"/>
+        <ImageView fx:id="shiftButton" fitHeight="150.0" fitWidth="200.0" layoutX="1016.0" layoutY="660.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="icons/shift.png"/>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1016.0" layoutY="564.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <Image url="icons/horloge.png"/>
+        </ImageView>
+        <ImageView fitHeight="126.0" fitWidth="312.0" layoutX="858.0" layoutY="431.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <Image url="icons/automatedbutton.png"/>
+        </ImageView>
+        <ImageView fitHeight="48.0" fitWidth="167.0" layoutX="608.0" layoutY="622.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <Image url="icons/ouinonbutton.png"/>
+        </ImageView>
+        <Slider layoutX="25.0" layoutY="603.0"/>
+        <ImageView fx:id="needleBoiler" fitHeight="211.0" fitWidth="31.0" layoutX="468.0" layoutY="133.0"
+                   pickOnBounds="true" preserveRatio="true" rotate="130.6">
+            <Image url="icons/aiguille.png"/>
+        </ImageView>
+        <Text layoutX="916.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cuve"/>
+        <Text layoutX="891.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Non fonctionnel"/>
+        <Text layoutX="890.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Non fonctionnel"/>
+        <Text layoutX="1071.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chaudière"/>
+        <Text layoutX="909.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manuel"/>
+        <Text layoutX="1078.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manuel"/>
+        <Text layoutX="1059.0" layoutY="509.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Automatique&#10;Non fonctionnel" textAlignment="CENTER"/>
+        <Text layoutX="886.0" layoutY="509.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Automatique&#10;Non fonctionnel" textAlignment="CENTER"/>
+        <TextField fx:id="tankAlarmLabel" layoutX="860.0" layoutY="154.0"
+                   style="-fx-background-color: transparent;"/>
+        <TextField fx:id="boilerAlarmLabel" layoutX="859.0" layoutY="331.0"
+                   style="-fx-background-color: transparent;"/>
+        <Text layoutX="639.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oui"/>
+        <Text layoutX="718.0" layoutY="652.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Non"/>
+        <Text layoutX="613.0" layoutY="603.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Mutualiser le flux des vannes&#10;Non fonctionnel" textAlignment="CENTER"/>
+        <Text layoutX="46.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Vanne eau chaude&#10;Non fonctionnel" textAlignment="CENTER"/>
+        <Slider fx:id="valveDebitSlider" layoutX="25.0" layoutY="676.0"/>
+        <Text layoutX="64.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vanne cuve"/>
+        <Slider layoutX="170.0" layoutY="603.0"/>
+        <Text layoutX="197.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Vanne recyclage&#10;Non fonctionnel" textAlignment="CENTER"/>
+        <Slider fx:id="pumpDebitSlider" layoutX="170.0" layoutY="675.0"/>
+        <Text layoutX="203.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vanne pompe"/>
+        <Slider layoutX="314.0" layoutY="602.0"/>
+        <Text layoutX="310.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Vanne de contrôle recyclage&#10;Non fonctionnel" textAlignment="CENTER"/>
+        <Slider fx:id="powerBoilerSlider" layoutX="314.0" layoutY="677.0"/>
+        <Text layoutX="330.0" layoutY="670.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Puissance chaudière"/>
+        <Slider layoutX="457.0" layoutY="602.0"/>
+        <Text layoutX="469.0" layoutY="569.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Vanne de &#10;contrôle pasteurisation&#10;Non fonctionnel&#10;" textAlignment="CENTER"/>
+        <Slider layoutX="457.0" layoutY="677.0"/>
+        <Text layoutX="478.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Puissance pompe&#10;Non fonctionnel" textAlignment="CENTER"/>
+        <ImageView fx:id="needleTank" fitHeight="120.0" fitWidth="31.0" layoutX="891.0" layoutY="617.0"
+                   pickOnBounds="true" preserveRatio="true" rotate="160.6">
+            <Image url="icons/aiguille.png"/>
+        </ImageView>
+        <Text layoutX="1079.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Relève de shift"/>
+        <TextField fx:id="clockLabel" layoutX="1042.0" layoutY="588.0" style="-fx-background-color: transparent;"/>
+        <TextField fx:id="tankTempLabel" layoutX="817.0" layoutY="688.0"
+                   style="-fx-background-color: transparent;"/>
+        <Text layoutX="645.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pasteurisé :"/>
+        <Text layoutX="692.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pertes :"/>
+        <Text layoutX="571.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Consommation :"/>
+        <Text layoutX="149.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recyclé :"/>
+        <TextField fx:id="pasteurizedLabel" layoutX="714.0" layoutY="433.0" prefHeight="25.0" prefWidth="65.0"
+                   style="-fx-background-color: transparent;"/>
+        <TextField fx:id="spoilLabel" layoutX="734.0" layoutY="343.0" prefHeight="25.0" prefWidth="45.0"
+                   style="-fx-background-color: transparent;"/>
+        <TextField fx:id="boilerTemperatureLabel" layoutX="578.0" layoutY="184.0" prefHeight="25.0" prefWidth="74.0"
+                   style="-fx-background-color: transparent;"/>
+        <TextField fx:id="recycleLabel" layoutX="199.0" layoutY="49.0" prefHeight="25.0" prefWidth="45.0"
+                   style="-fx-background-color: transparent;"/>
+        <TextField fx:id="boilerPowerLabel" layoutX="591.0" layoutY="146.0" prefHeight="25.0" prefWidth="45.0"
+                   style="-fx-background-color: transparent;"/>
+        <Text layoutX="634.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mW"/>
+        <ImageView fx:id="yellowArrow3" fitHeight="14.0" fitWidth="31.0" layoutX="150.0" layoutY="509.0"
+                   pickOnBounds="true" preserveRatio="true" rotate="180.0">
+            <Image url="icons/jaune.png"/>
+        </ImageView>
+        <ImageView fx:id="yellowArrow5" fitHeight="14.0" fitWidth="31.0" layoutX="414.0" layoutY="326.0"
+                   pickOnBounds="true" preserveRatio="true" rotate="180.0">
+            <Image url="icons/jaune.png"/>
+        </ImageView>
+        <ImageView fx:id="yellowArrow2" fitHeight="14.0" fitWidth="31.0" layoutX="-7.0" layoutY="447.0"
+                   pickOnBounds="true" preserveRatio="true" rotate="270.0">
+            <Image url="icons/jaune.png"/>
+        </ImageView>
+        <ImageView fx:id="yellowArrow1" fitHeight="14.0" fitWidth="31.0" layoutX="-7.0" layoutY="220.0"
+                   pickOnBounds="true" preserveRatio="true" rotate="270.0">
+            <Image url="icons/jaune.png"/>
+        </ImageView>
+        <ImageView fx:id="yellowArrow4" fitHeight="14.0" fitWidth="31.0" layoutX="329.0" layoutY="419.0"
+                   pickOnBounds="true" preserveRatio="true" rotate="90.0">
+            <Image url="icons/jaune.png"/>
+        </ImageView>
+        <ImageView fx:id="yellowArrow6" fitHeight="14.0" fitWidth="31.0" layoutX="593.0" layoutY="326.0"
+                   pickOnBounds="true" preserveRatio="true" rotate="180.0">
+            <Image url="icons/jaune.png"/>
+        </ImageView>
+        <ImageView fx:id="redArrow1" fitHeight="14.0" fitWidth="31.0" layoutX="742.0" layoutY="291.0"
+                   pickOnBounds="true" preserveRatio="true" rotate="180.0">
+            <Image url="icons/rouge.png"/>
+        </ImageView>
+        <ImageView fx:id="greenArrow1" fitHeight="14.0" fitWidth="31.0" layoutX="582.0" layoutY="290.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="icons/vert.png"/>
+        </ImageView>
+        <ImageView fx:id="greenArrow2" fitHeight="14.0" fitWidth="31.0" layoutX="399.0" layoutY="289.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="icons/vert.png"/>
+        </ImageView>
+        <ImageView fx:id="greenArrow3" fitHeight="14.0" fitWidth="31.0" layoutX="232.0" layoutY="440.0"
+                   pickOnBounds="true" preserveRatio="true" rotate="270.0">
+            <Image url="icons/vert.png"/>
+        </ImageView>
+        <ImageView fx:id="greenArrow4" fitHeight="14.0" fitWidth="31.0" layoutX="399.0" layoutY="471.0"
+                   pickOnBounds="true" preserveRatio="true" rotate="180.0">
+            <Image url="icons/vert.png"/>
+        </ImageView>
+        <ImageView fx:id="greenArrow5" fitHeight="14.0" fitWidth="31.0" layoutX="578.0" layoutY="471.0"
+                   pickOnBounds="true" preserveRatio="true" rotate="180.0">
+            <Image url="icons/vert.png"/>
+        </ImageView>
+        <ImageView fx:id="blueArrow1" fitHeight="14.0" fitWidth="31.0" layoutX="593.0" layoutY="27.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="icons/bleu.png"/>
+        </ImageView>
+        <ImageView fx:id="blueArrow2" fitHeight="14.0" fitWidth="31.0" layoutX="399.0" layoutY="27.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="icons/bleu.png"/>
+        </ImageView>
+        <ImageView fx:id="blueArrow3" fitHeight="14.0" fitWidth="31.0" layoutX="206.0" layoutY="27.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="icons/bleu.png"/>
+        </ImageView>
+        <Rectangle fx:id="tankJuice" arcHeight="5.0" arcWidth="5.0" fill="#ffa24c" height="223.0" layoutX="22.0"
+                   layoutY="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="123.0"/>
+    </AnchorPane>
+</VBox>
