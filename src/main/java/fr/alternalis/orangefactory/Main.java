@@ -4,6 +4,7 @@ import fr.alternalis.orangefactory.elements.Clock;
 import fr.alternalis.orangefactory.elements.Indicator;
 import fr.alternalis.orangefactory.elements.Parameter;
 import fr.alternalis.orangefactory.elements.Processor;
+import fr.alternalis.orangefactory.logger.Logger;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -49,10 +50,12 @@ public class Main extends Application
     }
 
     public void engageFactory() {
+        Logger.openFile();
         Indicator.startTime = System.currentTimeMillis();
         Timer timer = new Timer("FactoryTimer");
         timer.schedule(new Processor(), 0, Parameter.cycleTime.intValue());
         Timer clockTimer = new Timer("ClockTimer");
         clockTimer.schedule(new Clock(), 0,  1000);
+        Logger.writeLog("State", "Application", "Start");
     }
 }
