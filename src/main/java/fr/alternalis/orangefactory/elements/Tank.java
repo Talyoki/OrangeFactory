@@ -19,7 +19,7 @@ public class Tank
     private static final Double LEVEL_FULL_ALARM = 900D;
     private static final Double LEVEL_EMPTY_ALARM = 300D;
 
-    private Controller controller;
+    private final Controller controller;
 
     public Tank(Controller controller){
         this.controller = controller;
@@ -51,7 +51,9 @@ public class Tank
         {
             Indicator.overflow = Indicator.overflow + level - LEVEL_MAX;
             Indicator.spoil = Indicator.spoil + level - LEVEL_MAX;
-            controller.setYellowArrowVisible();
+            synchronized (controller){
+                controller.setYellowArrowVisible();
+            }
             Logger.writeLog("Info", "Tube jaune", "Quantité gachée : " + (level - LEVEL_MAX));
             level = LEVEL_MAX;
         }

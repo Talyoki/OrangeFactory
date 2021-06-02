@@ -108,7 +108,9 @@ public class Processor extends TimerTask
         if (thermalExchanger3 != null)
         {
             Indicator.pasteurized = Indicator.pasteurized + thermalExchanger3.getQuantity();
-            controller.setGreenArrowVisible();
+            synchronized (controller){
+                controller.setGreenArrowVisible();
+            }
             Logger.writeLog("Info", "Tube vert", "Quantité produite : " + thermalExchanger3.getQuantity());
             thermalExchanger3 = null;
         }
@@ -126,12 +128,16 @@ public class Processor extends TimerTask
                     tank.setTemp(tank.getTemp() + 1);
                 }
                 tank.addJuice(thermalExchanger2.getQuantity());
-                controller.setBlueArrowVisible();
+                synchronized (controller){
+                    controller.setBlueArrowVisible();
+                }
                 Logger.writeLog("Info", "Tube bleu", "Quantité recyclée : " + thermalExchanger2.getQuantity());
             } else if (thermalExchanger2.getTemp() > tempMaxForValidity)
             {
                 Indicator.spoil = Indicator.spoil + thermalExchanger2.getQuantity();
-                controller.setRedArrowVisible();
+                synchronized (controller){
+                    controller.setRedArrowVisible();
+                }
                 Logger.writeLog("Info", "Tube rouge", "Quantité gachée : " + thermalExchanger2.getQuantity());
 
             } else

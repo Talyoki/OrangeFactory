@@ -69,8 +69,6 @@ public class Controller implements Initializable
         powerBoilerSlider.setMin(processor.getBoiler().getMinPower());
         powerBoilerSlider.setMax(processor.getBoiler().getMaxPower());
 
-        engageFactory();
-
         clockLabel.setEditable(false);
         tankTempLabel.setEditable(false);
         pasteurizedLabel.setEditable(false);
@@ -81,7 +79,8 @@ public class Controller implements Initializable
         tankAlarmLabel.setEditable(false);
         boilerAlarmLabel.setEditable(false);
 
-        setArrowInvisible();
+        engageFactory();
+
     }
 
     public void engageFactory() {
@@ -90,8 +89,8 @@ public class Controller implements Initializable
         Timer clockTimer = new Timer("ClockTimer");
         clockTimer.schedule(new Clock(this), 0,  1000);
         Logger.writeLog("State", "Application", "Start");
-        Timer timer = new Timer("FactoryTimer");
-        timer.schedule(processor, 0, Parameter.cycleTime.intValue());
+        Timer timerFactory = new Timer("FactoryTimer");
+        timerFactory.schedule(processor, 0, Parameter.cycleTime.intValue());
     }
 
     public void setLevelTank(Double levelPercent)
@@ -126,13 +125,17 @@ public class Controller implements Initializable
         recycleLabel.setText(String.valueOf(Indicator.recycle));
     }
 
-    public void setBoilerPower()
+    public void setBoilerTemp()
     {
         Boiler boiler = processor.getBoiler();
-        boilerPowerLabel.setText(String.valueOf(boiler.getPower()));
         boilerTemperatureLabel.setText(String.valueOf(boiler.getTemp()));
-        powerBoilerSlider.setValue(boiler.getPower());
         needleBoiler.setRotate((100D/150*boiler.getTemp())/100*104+128);
+    }
+
+    public void setBoilerPower(){
+        Boiler boiler = processor.getBoiler();
+        boilerPowerLabel.setText(String.valueOf(boiler.getPower()));
+        powerBoilerSlider.setValue(boiler.getPower());
     }
 
     public void setArrowInvisible(){

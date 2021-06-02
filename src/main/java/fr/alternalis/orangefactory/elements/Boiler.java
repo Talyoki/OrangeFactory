@@ -36,6 +36,9 @@ public class Boiler
     public void powerChange(Double newPower)
     {
         power = newPower;
+        synchronized (controller){
+            controller.setBoilerPower();
+        }
         if(thread != null){
             thread.interrupt();
         }
@@ -56,7 +59,7 @@ public class Boiler
             for(int i = 0; i < nbCycle; i++)
             {
                 synchronized (controller) {
-                    controller.setBoilerPower();
+                    controller.setBoilerTemp();
                 }
                 Thread.sleep(latencyBoiler);
                 if(thread.isInterrupted()) return;
