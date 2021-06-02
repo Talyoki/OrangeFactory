@@ -13,7 +13,7 @@ public class Tank
 
     private Boolean active = true;
 
-    private Double enteringAmount = 0D;
+    private Double enteringAmount = 15D;
 
     private static final Double LEVEL_MAX = 1000D;
     private static final Double LEVEL_FULL_ALARM = 900D;

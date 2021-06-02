@@ -2,6 +2,7 @@ package fr.alternalis.orangefactory;
 
 import fr.alternalis.orangefactory.elements.*;
 import fr.alternalis.orangefactory.logger.Logger;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Slider;
@@ -79,6 +80,29 @@ public class Controller implements Initializable
                 processor.getValve().setDebit(valveDebitSlider.getValue());
             }
         };
+
+        EventHandler<MouseEvent> eventHandlerShift = e -> Logger.writeLog("Info","Shift","L'utilisateur laisse son poste a un autre");
+
+        EventHandler<MouseEvent> eventHandlerStop = e -> {
+            Platform.exit();
+            System.exit(0);
+        };
+
+        EventHandler<MouseEvent> eventHandlerStopBoiler = e -> processor.getBoiler().setActive(!processor.getBoiler().getActive());
+
+        EventHandler<MouseEvent> eventHandlerStopTank = e -> processor.getTank().setActive(!processor.getTank().getActive());
+
+        //Stop tank button event
+        stopTank.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandlerStopTank);
+
+        //Stop boiler button event
+        stopBoiler.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandlerStopBoiler);
+
+        //Stop button event
+        stopButton.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandlerStop);
+
+        //Shift button event
+        shiftButton.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandlerShift);
 
         //Adding event for pump slider
         pumpDebitSlider.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandlerPump);
