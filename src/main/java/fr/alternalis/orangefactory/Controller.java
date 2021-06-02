@@ -2,17 +2,12 @@ package fr.alternalis.orangefactory;
 
 import fr.alternalis.orangefactory.elements.*;
 import fr.alternalis.orangefactory.logger.Logger;
-import javafx.beans.property.DoublePropertyBase;
-import javafx.beans.property.ReadOnlyDoublePropertyBase;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
@@ -43,6 +38,7 @@ public class Controller implements Initializable
     public TextField boilerTemperatureLabel;
     public TextField recycleLabel;
     public TextField boilerPowerLabel;
+
     public ImageView yellowArrow3;
     public ImageView yellowArrow5;
     public ImageView yellowArrow2;
@@ -58,17 +54,14 @@ public class Controller implements Initializable
     public ImageView blueArrow1;
     public ImageView blueArrow2;
     public ImageView blueArrow3;
+
     public Rectangle tankJuice;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent e) {
-                processor.getBoiler().powerChange(powerBoilerSlider.getValue());
-            }
-        };
+        EventHandler<MouseEvent> eventHandler = e -> processor.getBoiler().powerChange(powerBoilerSlider.getValue());
+
         //Adding event Filter
         powerBoilerSlider.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
         powerBoilerSlider.setMin(1D);
@@ -99,9 +92,9 @@ public class Controller implements Initializable
 
     public void setLevelTank(Double levelPercent)
     {
-        Double maxHtank = 223D;
-        tankJuice.setHeight(maxHtank/100D*levelPercent);
-        tankJuice.setLayoutY(100D+maxHtank-maxHtank/100D*levelPercent);
+        double maxHTank = 223D;
+        tankJuice.setHeight(maxHTank/100D*levelPercent);
+        tankJuice.setLayoutY(100D+maxHTank-maxHTank/100D*levelPercent);
     }
 
     public void setClockLabel()
@@ -133,6 +126,7 @@ public class Controller implements Initializable
     {
         Boiler boiler = processor.getBoiler();
         boilerPowerLabel.setText(String.valueOf(boiler.getPower()));
+        boilerTemperatureLabel.setText(String.valueOf(boiler.getTemp()));
         powerBoilerSlider.setValue(boiler.getPower());
         needleBoiler.setRotate((100D/150*boiler.getTemp())/100*104+128);
     }

@@ -1,5 +1,6 @@
 package fr.alternalis.orangefactory.elements;
 
+import fr.alternalis.orangefactory.Controller;
 import fr.alternalis.orangefactory.logger.Logger;
 
 public class Boiler
@@ -24,10 +25,21 @@ public class Boiler
 
     private static final Integer latencyBoiler = 1000;
 
+    private Controller controller;
+
+    public static Thread thread;
+
+    public Boiler(Controller controller){
+        this.controller = controller;
+    }
+
     public void powerChange(Double newPower)
     {
         power = newPower;
-        Thread thread = new Thread(() -> tempChange(maxTemp * (newPower / 100)));
+        if(thread != null){
+            thread.interrupt();
+        }
+        thread = new Thread(() -> tempChange(maxTemp * (newPower / 100)));
         thread.start();
         Logger.writeLog("Action", "Chaudière", "Puissance : " + newPower);
     }
@@ -43,14 +55,16 @@ public class Boiler
 
             for(int i = 0; i < nbCycle; i++)
             {
+                controller.setBoilerPower();
                 Thread.sleep(latencyBoiler);
+                if(thread.isInterrupted()) return;
                 if(temp  < newTemp) temp = temp + 1;
                 else if (temp > newTemp) temp = temp - 1;
             }
         }
         catch (InterruptedException e)
         {
-            e.printStackTrace();
+            //Do nothing
         }
     }
 

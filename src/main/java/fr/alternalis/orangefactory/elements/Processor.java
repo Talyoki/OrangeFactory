@@ -18,13 +18,14 @@ public class Processor extends TimerTask
     private Juice thermalExchanger1 = null;
     private Juice thermalExchanger2 = null;
     private Juice thermalExchanger3 = null;
-    private Boiler boiler = new Boiler();
+    private Boiler boiler;
     private Tank tank = new Tank();
     private Valve valve = new Valve();
 
     public Processor(Controller controller)
     {
         this.controller = controller;
+        boiler = new Boiler(controller);
     }
 
     @Override
@@ -53,7 +54,6 @@ public class Processor extends TimerTask
             controller.setPasteurizedLabel();
             controller.setSpoilLabel();
             controller.setRecycleLabel();
-            controller.setBoilerPower();
 
             isRunning = false;
         }
