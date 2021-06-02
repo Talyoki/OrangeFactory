@@ -2,6 +2,7 @@ package fr.alternalis.orangefactory.elements;
 
 import fr.alternalis.orangefactory.Controller;
 import fr.alternalis.orangefactory.logger.Logger;
+import javafx.application.Platform;
 
 public class Tank
 {
@@ -51,9 +52,7 @@ public class Tank
         {
             Indicator.overflow = Indicator.overflow + level - LEVEL_MAX;
             Indicator.spoil = Indicator.spoil + level - LEVEL_MAX;
-            synchronized (controller){
-                controller.setYellowArrowVisible();
-            }
+            Platform.runLater(controller::setYellowArrowVisible);
             Logger.writeLog("Info", "Tube jaune", "Quantité gachée : " + (level - LEVEL_MAX));
             level = LEVEL_MAX;
         }

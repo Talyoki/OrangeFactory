@@ -1,6 +1,7 @@
 package fr.alternalis.orangefactory.elements;
 
 import fr.alternalis.orangefactory.Controller;
+import javafx.application.Platform;
 
 import java.time.Duration;
 import java.util.TimerTask;
@@ -19,7 +20,7 @@ public class Clock extends TimerTask {
     @Override
     public void run(){
         currentExecTime = System.currentTimeMillis() - Indicator.startTime;
-        controller.setClockLabel();
+        Platform.runLater(() -> controller.setClockLabel());
     }
 
     public static String getCurrentExecTime(){

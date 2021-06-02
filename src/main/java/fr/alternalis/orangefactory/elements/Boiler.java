@@ -2,6 +2,7 @@ package fr.alternalis.orangefactory.elements;
 
 import fr.alternalis.orangefactory.Controller;
 import fr.alternalis.orangefactory.logger.Logger;
+import javafx.application.Platform;
 
 public class Boiler
 {
@@ -36,9 +37,7 @@ public class Boiler
     public void powerChange(Double newPower)
     {
         power = newPower;
-        synchronized (controller){
-            controller.setBoilerPower();
-        }
+        Platform.runLater(controller::setBoilerPower);
         if(thread != null){
             thread.interrupt();
         }
@@ -58,9 +57,7 @@ public class Boiler
 
             for(int i = 0; i < nbCycle; i++)
             {
-                synchronized (controller) {
-                    controller.setBoilerTemp();
-                }
+                Platform.runLater(controller::setBoilerTemp);
                 Thread.sleep(latencyBoiler);
                 if(thread.isInterrupted()) return;
                 if(temp  < newTemp) temp = temp + 1;
