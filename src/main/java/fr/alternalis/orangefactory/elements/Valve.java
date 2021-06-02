@@ -7,7 +7,7 @@ public class Valve
 
     private final Double maxOut = 200D;
     private final Double minOut = 1D;
-    private Double debit = 20D;
+    private Double debit = 0D;
 
     private static final Integer latencyValve = 1000;
 

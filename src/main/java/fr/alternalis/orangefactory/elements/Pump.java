@@ -5,7 +5,7 @@ import fr.alternalis.orangefactory.logger.Logger;
 public class Pump {
     private final Double maxOut = 2000D;
     private final Double minOut = 1D;
-    private Double debit = 2000D;
+    private Double debit = 0D;
 
     private static final Integer latencyPump = 1000;
 

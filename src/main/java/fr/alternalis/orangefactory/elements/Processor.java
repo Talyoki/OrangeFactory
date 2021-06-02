@@ -104,14 +104,14 @@ public class Processor extends TimerTask
 
     public void switchingSides()
     {
-        if (thermalExchanger3 != null)
+        if (thermalExchanger3 != null && thermalExchanger3.getQuantity() != 0)
         {
             Indicator.pasteurized = Indicator.pasteurized + thermalExchanger3.getQuantity();
             Platform.runLater(controller::setGreenArrowVisible);
             Logger.writeLog("Info", "Tube vert", "Quantité produite : " + thermalExchanger3.getQuantity());
             thermalExchanger3 = null;
         }
-        if (thermalExchanger2 != null)
+        if (thermalExchanger2 != null && thermalExchanger2.getQuantity() != 0)
         {
             if (thermalExchanger2.getTemp() < tempMinForValidity)
             {
@@ -138,7 +138,7 @@ public class Processor extends TimerTask
                 thermalExchanger3 = clone(thermalExchanger2);
             }
         }
-        thermalExchanger2 = clone(thermalExchanger1);
+        if(thermalExchanger1.getQuantity() != 0) thermalExchanger2 = clone(thermalExchanger1);
     }
 
     private Juice clone(Juice juice)

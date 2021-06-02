@@ -7,7 +7,7 @@ import javafx.application.Platform;
 public class Boiler
 {
 
-    private Double temp = 21D;
+    private Double temp = 0D;
     private Double power = 0D;
 
     private Pump pump = new Pump();

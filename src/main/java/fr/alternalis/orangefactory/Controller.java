@@ -33,6 +33,7 @@ public class Controller implements Initializable
     public Slider valveDebitSlider;
     public Slider pumpDebitSlider;
     public Slider powerBoilerSlider;
+    public Slider valveEntrySlider;
     public ImageView needleTank;
     public TextField clockLabel;
     public TextField tankTempLabel;
@@ -81,6 +82,12 @@ public class Controller implements Initializable
             }
         };
 
+        EventHandler<MouseEvent> eventHandlerEntry = e -> {
+            synchronized(processor.getTank().getEnteringAmount()) {
+                processor.getTank().setEnteringAmount(valveEntrySlider.getValue());
+            }
+        };
+
         EventHandler<MouseEvent> eventHandlerShift = e -> Logger.writeLog("Info","Shift","L'utilisateur laisse son poste a un autre");
 
         EventHandler<MouseEvent> eventHandlerStop = e -> {
@@ -118,6 +125,11 @@ public class Controller implements Initializable
         powerBoilerSlider.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandlerBoiler);
         powerBoilerSlider.setMin(processor.getBoiler().getMinPower());
         powerBoilerSlider.setMax(processor.getBoiler().getMaxPower());
+
+        //Adding event for entry juice
+        valveEntrySlider.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandlerEntry);
+        valveEntrySlider.setMin(1D);
+        valveEntrySlider.setMax(100D);
 
         clockLabel.setEditable(false);
         tankTempLabel.setEditable(false);

@@ -14,7 +14,7 @@ public class Tank
 
     private Boolean active = true;
 
-    private Double enteringAmount = 15D;
+    private Double enteringAmount = 0D;
 
     private static final Double LEVEL_MAX = 1000D;
     private static final Double LEVEL_FULL_ALARM = 900D;
@@ -155,5 +155,13 @@ public class Tank
     public Boolean getEmptyAlarm()
     {
         return emptyAlarm;
+    }
+
+    public Double getEnteringAmount() {
+        return enteringAmount;
+    }
+
+    public void setEnteringAmount(Double enteringAmount) {
+        this.enteringAmount = enteringAmount;
     }
 }
