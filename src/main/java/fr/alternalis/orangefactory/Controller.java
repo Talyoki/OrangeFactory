@@ -8,6 +8,8 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
@@ -64,8 +66,8 @@ public class Controller implements Initializable
 
         //Adding event Filter
         powerBoilerSlider.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
-        powerBoilerSlider.setMin(1D);
-        powerBoilerSlider.setMax(100D);
+        powerBoilerSlider.setMin(processor.getBoiler().getMinPower());
+        powerBoilerSlider.setMax(processor.getBoiler().getMaxPower());
 
         engageFactory();
 
@@ -176,5 +178,32 @@ public class Controller implements Initializable
 
     public void setRedArrowVisible(){
         redArrow1.setVisible(true);
+    }
+
+    public void updateAlarmLabelAndColor(){
+        if(processor.getBoiler().getOverloadAlarm()){
+            boilerAlarm.setFill(Paint.valueOf(Color.web("#F04723").toString()));
+            boilerAlarmLabel.setText("Chaudière en surchauffe");
+        } else if (processor.getBoiler().getEcoAlarm()){
+            boilerAlarm.setFill(Paint.valueOf(Color.web("#09B3CB").toString()));
+            boilerAlarmLabel.setText("Chaudière en économie");
+        } else {
+            boilerAlarm.setFill(Paint.valueOf(Color.web("#09CB32").toString()));
+            boilerAlarmLabel.setText("Chaudière ok");
+        }
+
+        if(processor.getTank().getFullAlarm()){
+            tankAlarm.setFill(Paint.valueOf(Color.web("#F04723").toString()));
+            tankAlarmLabel.setText("Niveau de cuve trop élevé");
+        } else if (processor.getTank().getAlmostEmptyAlarm()){
+            tankAlarm.setFill(Paint.valueOf(Color.web("#F04723").toString()));
+            tankAlarmLabel.setText("Niveau de cuve trop bas");
+        } else if (processor.getTank().getEmptyAlarm()) {
+            tankAlarm.setFill(Paint.valueOf(Color.web("#F04723").toString()));
+            tankAlarmLabel.setText("Cuve vide, arrêt.");
+        } else {
+            tankAlarm.setFill(Paint.valueOf(Color.web("#09CB32").toString()));
+            tankAlarmLabel.setText("Cuve ok");
+        }
     }
 }

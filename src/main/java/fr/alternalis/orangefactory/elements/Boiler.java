@@ -25,7 +25,7 @@ public class Boiler
 
     private static final Integer latencyBoiler = 1000;
 
-    private Controller controller;
+    private final Controller controller;
 
     public static Thread thread;
 
@@ -55,7 +55,9 @@ public class Boiler
 
             for(int i = 0; i < nbCycle; i++)
             {
-                controller.setBoilerPower();
+                synchronized (controller) {
+                    controller.setBoilerPower();
+                }
                 Thread.sleep(latencyBoiler);
                 if(thread.isInterrupted()) return;
                 if(temp  < newTemp) temp = temp + 1;
@@ -147,5 +149,13 @@ public class Boiler
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public Double getMaxPower() {
+        return maxPower;
+    }
+
+    public Double getMinPower() {
+        return minPower;
     }
 }

@@ -60,6 +60,7 @@ public class Processor extends TimerTask
             controller.setPasteurizedLabel();
             controller.setSpoilLabel();
             controller.setRecycleLabel();
+            controller.updateAlarmLabelAndColor();
             }
 
             isRunning = false;

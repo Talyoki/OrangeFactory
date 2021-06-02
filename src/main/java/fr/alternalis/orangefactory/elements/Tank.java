@@ -17,7 +17,7 @@ public class Tank
 
     private static final Double LEVEL_MAX = 1000D;
     private static final Double LEVEL_FULL_ALARM = 900D;
-    private static final Double LEVEL_EMPTY_ALARM = 100D;
+    private static final Double LEVEL_EMPTY_ALARM = 300D;
 
     private Controller controller;
 
