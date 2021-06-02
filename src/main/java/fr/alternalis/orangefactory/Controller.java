@@ -62,14 +62,36 @@ public class Controller implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        EventHandler<MouseEvent> eventHandler = e -> {
+        EventHandler<MouseEvent> eventHandlerBoiler = e -> {
             synchronized(processor.getBoiler().getPower()) {
                 processor.getBoiler().powerChange(powerBoilerSlider.getValue());
             }
         };
 
-        //Adding event Filter
-        powerBoilerSlider.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+        EventHandler<MouseEvent> eventHandlerPump = e -> {
+            synchronized(processor.getBoiler().getPump().getDebit()) {
+                processor.getBoiler().getPump().setDebit(pumpDebitSlider.getValue());
+            }
+        };
+
+        EventHandler<MouseEvent> eventHandlerValve = e -> {
+            synchronized(processor.getValve().getDebit()) {
+                processor.getValve().setDebit(valveDebitSlider.getValue());
+            }
+        };
+
+        //Adding event for pump slider
+        pumpDebitSlider.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandlerPump);
+        pumpDebitSlider.setMin(processor.getBoiler().getPump().getMinOut());
+        pumpDebitSlider.setMax(processor.getBoiler().getPump().getMaxOut());
+
+        //Adding event for valve slider
+        valveDebitSlider.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandlerValve);
+        valveDebitSlider.setMin(processor.getValve().getMinOut());
+        valveDebitSlider.setMax(processor.getValve().getMaxOut());
+
+        //Adding event for power slider
+        powerBoilerSlider.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandlerBoiler);
         powerBoilerSlider.setMin(processor.getBoiler().getMinPower());
         powerBoilerSlider.setMax(processor.getBoiler().getMaxPower());
 

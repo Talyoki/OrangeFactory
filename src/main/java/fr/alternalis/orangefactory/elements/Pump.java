@@ -9,6 +9,8 @@ public class Pump {
 
     private static final Integer latencyPump = 1000;
 
+    public static Thread threadPump;
+
     public Double getDebit()
     {
         return debit;
@@ -16,15 +18,18 @@ public class Pump {
 
     public void setDebit(Double debit)
     {
-        Thread thread = new Thread(() -> applyDebit(debit));
-        thread.start();
+        if(threadPump != null){
+            threadPump.interrupt();
+        }
+        threadPump = new Thread(() -> applyDebit(debit));
+        threadPump.start();
         Logger.writeLog("Info", "Pompe", "Débit de la pompe modifié : " + debit);
     }
 
     public void applyDebit(Double debit){
         try {
             Thread.sleep(latencyPump);
-
+            if(threadPump.isInterrupted()) return;
             if (debit > maxOut)
             {
                 this.debit = maxOut;
@@ -36,11 +41,19 @@ public class Pump {
                 this.debit = debit;
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            //Do nothing
         }
     }
 
     public Double getPercentage(){
         return debit / maxOut;
+    }
+
+    public Double getMaxOut() {
+        return maxOut;
+    }
+
+    public Double getMinOut() {
+        return minOut;
     }
 }

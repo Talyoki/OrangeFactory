@@ -11,6 +11,8 @@ public class Valve
 
     private static final Integer latencyValve = 1000;
 
+    public static Thread threadValve;
+
     public Double getDebit()
     {
         return debit;
@@ -18,15 +20,18 @@ public class Valve
 
     public void setDebit(Double debit)
     {
-        Thread thread = new Thread(() -> applyDebit(debit));
-        thread.start();
+        if(threadValve != null){
+            threadValve.interrupt();
+        }
+        threadValve = new Thread(() -> applyDebit(debit));
+        threadValve.start();
         Logger.writeLog("Action", "Vanne", "Débit de la vanne : " + debit);
     }
 
     public void applyDebit(Double debit){
         try {
             Thread.sleep(latencyValve);
-
+            if(threadValve.isInterrupted()) return;
             if (debit > maxOut)
             {
                 this.debit = maxOut;
@@ -38,7 +43,15 @@ public class Valve
                 this.debit = debit;
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            //Do nothing
         }
+    }
+
+    public Double getMaxOut() {
+        return maxOut;
+    }
+
+    public Double getMinOut() {
+        return minOut;
     }
 }
