@@ -62,7 +62,11 @@ public class Controller implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        EventHandler<MouseEvent> eventHandler = e -> processor.getBoiler().powerChange(powerBoilerSlider.getValue());
+        EventHandler<MouseEvent> eventHandler = e -> {
+            synchronized(processor.getBoiler().getPower()) {
+                processor.getBoiler().powerChange(powerBoilerSlider.getValue());
+            }
+        };
 
         //Adding event Filter
         powerBoilerSlider.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
