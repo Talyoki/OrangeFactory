@@ -23,8 +23,9 @@ public class Logger {
             } else {
                 if(logFile.delete() && logFile.createNewFile()){
                     System.out.println("File already exists but was deleted.");
+                } else {
+                    System.out.println("File already exists but was not deleted.");
                 }
-                System.out.println("File already exists but was not deleted.");
             }
             writer = new FileWriter(logFile, true);
         } catch (IOException e) {
