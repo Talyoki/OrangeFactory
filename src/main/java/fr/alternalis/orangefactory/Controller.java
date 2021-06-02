@@ -78,6 +78,8 @@ public class Controller implements Initializable
         boilerPowerLabel.setEditable(false);
         tankAlarmLabel.setEditable(false);
         boilerAlarmLabel.setEditable(false);
+
+        setArrowInvisible();
     }
 
     public void engageFactory() {
@@ -129,5 +131,50 @@ public class Controller implements Initializable
         boilerTemperatureLabel.setText(String.valueOf(boiler.getTemp()));
         powerBoilerSlider.setValue(boiler.getPower());
         needleBoiler.setRotate((100D/150*boiler.getTemp())/100*104+128);
+    }
+
+    public void setArrowInvisible(){
+        blueArrow1.setVisible(false);
+        blueArrow2.setVisible(false);
+        blueArrow3.setVisible(false);
+        redArrow1.setVisible(false);
+        yellowArrow1.setVisible(false);
+        yellowArrow2.setVisible(false);
+        yellowArrow3.setVisible(false);
+        yellowArrow4.setVisible(false);
+        yellowArrow5.setVisible(false);
+        yellowArrow6.setVisible(false);
+        greenArrow1.setVisible(false);
+        greenArrow2.setVisible(false);
+        greenArrow3.setVisible(false);
+        greenArrow4.setVisible(false);
+        greenArrow5.setVisible(false);
+    }
+
+    public void setBlueArrowVisible(){
+        blueArrow1.setVisible(true);
+        blueArrow2.setVisible(true);
+        blueArrow3.setVisible(true);
+    }
+
+    public void setYellowArrowVisible(){
+        yellowArrow1.setVisible(true);
+        yellowArrow2.setVisible(true);
+        yellowArrow3.setVisible(true);
+        yellowArrow4.setVisible(true);
+        yellowArrow5.setVisible(true);
+        yellowArrow6.setVisible(true);
+    }
+
+    public void setGreenArrowVisible(){
+        greenArrow1.setVisible(true);
+        greenArrow2.setVisible(true);
+        greenArrow3.setVisible(true);
+        greenArrow4.setVisible(true);
+        greenArrow5.setVisible(true);
+    }
+
+    public void setRedArrowVisible(){
+        redArrow1.setVisible(true);
     }
 }

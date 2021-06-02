@@ -19,6 +19,12 @@ public class Tank
     private static final Double LEVEL_FULL_ALARM = 900D;
     private static final Double LEVEL_EMPTY_ALARM = 100D;
 
+    private Controller controller;
+
+    public Tank(Controller controller){
+        this.controller = controller;
+    }
+
     public Juice generateJuice(Double valveSize){
         if(valveSize > level){
             valveSize = level;
@@ -45,6 +51,7 @@ public class Tank
         {
             Indicator.overflow = Indicator.overflow + level - LEVEL_MAX;
             Indicator.spoil = Indicator.spoil + level - LEVEL_MAX;
+            controller.setYellowArrowVisible();
             Logger.writeLog("Info", "Tube jaune", "Quantité gachée : " + (level - LEVEL_MAX));
             level = LEVEL_MAX;
         }
