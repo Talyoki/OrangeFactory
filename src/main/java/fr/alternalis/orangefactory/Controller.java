@@ -152,12 +152,18 @@ public class Controller implements Initializable
 
     public void setClockLabel()
     {
-        clockLabel.setText(Clock.getCurrentExecTime());
+        try{
+            clockLabel.setText(Clock.getCurrentExecTime());
+        } catch (Exception e){
+            //Do nothing
+        }
     }
 
     public void setTankTempLabel()
     {
-        tankTempLabel.setText(String.valueOf(processor.getTank().getTemp()));
+        Tank tank = processor.getTank();
+        tankTempLabel.setText(String.valueOf(tank.getTemp()));
+        needleTank.setRotate((100D/150*tank.getTemp())/100*104+128);
     }
 
     public void setPasteurizedLabel()
@@ -247,10 +253,10 @@ public class Controller implements Initializable
 
         if(processor.getTank().getFullAlarm()){
             tankAlarm.setFill(Paint.valueOf(Color.web("#F04723").toString()));
-            tankAlarmLabel.setText("Niveau de cuve trop élevé");
+            tankAlarmLabel.setText("Cuve surchargé");
         } else if (processor.getTank().getAlmostEmptyAlarm()){
             tankAlarm.setFill(Paint.valueOf(Color.web("#F04723").toString()));
-            tankAlarmLabel.setText("Niveau de cuve trop bas");
+            tankAlarmLabel.setText("Cuve sous chargé");
         } else if (processor.getTank().getEmptyAlarm()) {
             tankAlarm.setFill(Paint.valueOf(Color.web("#F04723").toString()));
             tankAlarmLabel.setText("Cuve vide, arrêt.");

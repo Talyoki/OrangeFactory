@@ -38,7 +38,7 @@ public class Tank
     }
 
     public void enteringJuice(){
-        if(active = true){
+        if(active){
             addJuice(enteringAmount);
             Indicator.total = Indicator.total + enteringAmount;
         }
